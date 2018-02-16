@@ -27,3 +27,17 @@ git add -A
 git commit -m "A short comment describing your changes" -m "Optional: add a 2nd (or 3rd) comment with more details"
 git push
 ```
+## Running the code
+- Run `mvn install` again to include any new changes.
+- To run the example code MyProgram1.java, do `java -cp target/jphys1-1.0-SNAPSHOT.jar edu.ung.MyProgram1`
+- If you get tired of running the same commands over and over again, you can create a shell script. For example, create a new file called build-and-run.sh with the following contents:
+```tcsh
+#!/bin/sh
+
+echo "beginning build and run..."
+mvn install
+java -cp target/jphys1-1.0-SNAPSHOT.jar edu.ung.MyProgram1
+echo "all done!"
+```
+- Make the file executable with the command `chmod +x build-and-run.sh`
+- Now you can run everything in the shell script with the simple command `./build-and-run.sh`
