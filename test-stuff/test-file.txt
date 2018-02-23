@@ -3,7 +3,7 @@ this is line 2
 this is line 3
 this is line 4
 
-Mireya's favorite color is...
+Mireya's favorite color is... blue
 <<<<<<< HEAD
 Mariana's favorite food is...ajiaco
 Cody's favorite movie is...
