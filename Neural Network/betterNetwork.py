@@ -1,5 +1,5 @@
 import sys
-import numpy
+import numpy 
 from sklearn.neural_network import MLPClassifier
 from datetime import datetime
 import math
@@ -63,10 +63,16 @@ Now test the classifier on the test data and print results
 score outputs a percent and it is multiplied by the number or events (len of predictions) to get the score in 'correct out of total' format
 """
 
+correct_matrix = []
+predictions = classifier.predict(test_data_matrix)   #may be able to remove
+for correct in range(0,len(predictions)):
+    if predictions[correct] == test_target_values[correct]:
+        correct_matrix[correct] = 1
+    else:
+        correct_matrix[correct] = 0
 
-#predictions = classifier.predict(test_data_matrix)   #may be able to remove
-score = classifier.score(test_data_matrix, test_target_values)
-print (int(score*len(test_data_matrix)), "out of {} correct".format(len(test_data_matrix)))
+print (numpy.sum(correct_matrix))
+#print (int(score*len(test_data_matrix)), "out of {} correct".format(len(test_data_matrix)))
 
 
 """
@@ -78,7 +84,7 @@ bins_all = []
 bins = int(input("number of bins? "))
 bin_width = max_value/bins
 
-## the v'n' is the coordinates. Test before assigning it to the matrix that keeps track of it
+## the v'#' is the coordinates. Test before assigning it to the matrix that keeps track of it
 
 
 for n in len(test_data_matrix):
