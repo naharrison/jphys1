@@ -1,4 +1,4 @@
-# jphys1
+# jphys1 [![Build Status](https://travis-ci.org/naharrison/jphys1.svg?branch=master)](https://travis-ci.org/naharrison/jphys1) [![codecov](https://codecov.io/gh/naharrison/jphys1/branch/master/graph/badge.svg)](https://codecov.io/gh/naharrison/jphys1)
 A test repository for students to practice using git, java, and other software tools.
 
 ## Requirements
