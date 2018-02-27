@@ -4,12 +4,13 @@ from sklearn.neural_network import MLPClassifier
 from datetime import datetime
 import math
 
+
 """
 Read in the training and test files from the command line
 or use the default values
 """
 trainingFileName = "data/data_train_5000.txt"
-testFileName = "data/data_test_10.txt"
+testFileName = "data/data_test_5000.txt"
 
 if(len(sys.argv) != 1 and len(sys.argv) != 3):
     print("wrong number of args... exiting")
@@ -53,8 +54,6 @@ with open(testFileName) as test_file:
         all_values = line.split(',')
         test_data_matrix.append(list(map(float, all_values[1:])))
         test_target_values.append(int(all_values[0]))
-        print (n)
-        n += 1
         
 
 """
@@ -64,16 +63,15 @@ score outputs a percent and it is multiplied by the number or events (len of pre
 """
 
 correct_matrix = []
-predictions = classifier.predict(test_data_matrix)   #may be able to remove
+predictions = classifier.predict(test_data_matrix)   
 for correct in range(0,len(predictions)):
     if predictions[correct] == test_target_values[correct]:
-        correct_matrix[correct] = 1
+        correct_matrix = numpy.append(correct_matrix,[1])
     else:
-        correct_matrix[correct] = 0
+        correct_matrix = numpy.append(correct_matrix,[0])
 
-print (numpy.sum(correct_matrix))
-#print (int(score*len(test_data_matrix)), "out of {} correct".format(len(test_data_matrix)))
-
+print (len(correct_matrix), "len of correct matrix")
+print (numpy.sum(correct_matrix), "sum of correct matrix")
 
 """
 Seperating into n bins
@@ -85,16 +83,15 @@ bins = int(input("number of bins? "))
 bin_width = max_value/bins
 
 ## the v'#' is the coordinates. Test before assigning it to the matrix that keeps track of it
-
-
-for n in len(test_data_matrix):
-    v1 = math.floor(test_data_matrix[n][0])
-    v2 = math.floor(test_data_matrix[n][1])
-    v3 = math.floor(test_data_matrix[n][2])
-    v4 = math.floor(test_data_matrix[n][3])
-    v5 = math.floor(test_data_matrix[n][4])
-    ## matrix with += to keep track of correct if correct   {1}
-    ## matrix that keeps track of total for each place      {2}
-    ## use numpy to perform matrix calculations on {1}/{2}
-    
-
+print(math.floor(test_data_matrix[1][0]/bin_width))
+histogram = numpy.zeros((bins,bins,bins,bins,bins), dtype=int)
+histogram_total = numpy.zeros((bins,bins,bins,bins,bins), dtype=int)
+for n in range(0,len(test_data_matrix)):
+    v1 = math.floor(test_data_matrix[n][0]/bin_width)-1   #the -1 is so that the index 
+    v2 = math.floor(test_data_matrix[n][1]/bin_width)-1   #will fit in the matrix since
+    v3 = math.floor(test_data_matrix[n][2]/bin_width)-1   #it starts at 0 not 1
+    v4 = math.floor(test_data_matrix[n][3]/bin_width)-1
+    v5 = math.floor(test_data_matrix[n][4]/bin_width)-1
+    if correct_matrix[n] == 1:
+        histogram[v1][v2][v3][v4][v5] +=1
+    histogram_total[v1][v2][v3][v4][v5] +=1
